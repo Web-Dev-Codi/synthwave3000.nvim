@@ -47,6 +47,7 @@ local light = {
 }
 
 function M.build(opts)
+  opts = opts or {}
   if opts.style == "light" then
     return vim.deepcopy(light)
   end

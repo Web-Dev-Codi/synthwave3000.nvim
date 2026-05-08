@@ -11,7 +11,7 @@ function M.rgb_to_hex(r, g, b)
   return string.format("#%02x%02x%02x", r, g, b)
 end
 
-function M.rgb_to_hsluv(r, g, b)
+function M.rgb_to_hsl(r, g, b)
   r, g, b = r / 255, g / 255, b / 255
   local max, min = math.max(r, g, b), math.min(r, g, b)
   local l = (max + min) / 2
@@ -32,7 +32,7 @@ function M.rgb_to_hsluv(r, g, b)
   return h * 360, s * 100, l * 100
 end
 
-function M.hsluv_to_rgb(h, s, l)
+function M.hsl_to_rgb(h, s, l)
   h, s, l = h / 360, s / 100, l / 100
   if s == 0 then
     l = l * 255
@@ -55,29 +55,29 @@ end
 
 function M.brighten(hex, amount)
   local r, g, b = M.hex_to_rgb(hex)
-  local h, s, l = M.rgb_to_hsluv(r, g, b)
+  local h, s, l = M.rgb_to_hsl(r, g, b)
   l = math.min(100, l + amount * 100)
-  r, g, b = M.hsluv_to_rgb(h, s, l)
+  r, g, b = M.hsl_to_rgb(h, s, l)
   return M.rgb_to_hex(math.floor(r + 0.5), math.floor(g + 0.5), math.floor(b + 0.5))
 end
 
 function M.darken(hex, amount)
   local r, g, b = M.hex_to_rgb(hex)
-  local h, s, l = M.rgb_to_hsluv(r, g, b)
+  local h, s, l = M.rgb_to_hsl(r, g, b)
   l = math.max(0, l - amount * 100)
-  r, g, b = M.hsluv_to_rgb(h, s, l)
+  r, g, b = M.hsl_to_rgb(h, s, l)
   return M.rgb_to_hex(math.floor(r + 0.5), math.floor(g + 0.5), math.floor(b + 0.5))
 end
 
-function M.blend(fg, bg, alpha)
-  local fr, fg_b, fb = M.hex_to_rgb(fg)
-  local br, bg_b, bb = M.hex_to_rgb(bg)
+function M.blend(fg_hex, bg_hex, alpha)
+  local fr, fg, fb = M.hex_to_rgb(fg_hex)
+  local br, bg, bb = M.hex_to_rgb(bg_hex)
   local function blend_channel(f, b)
     return math.floor(f * alpha + b * (1 - alpha) + 0.5)
   end
   return M.rgb_to_hex(
     blend_channel(fr, br),
-    blend_channel(fg_b, bg_b),
+    blend_channel(fg, bg),
     blend_channel(fb, bb)
   )
 end

@@ -1,6 +1,7 @@
 local M = {}
 
 function M.apply(opts)
+  opts = opts or {}
   if vim.g.colors_name then
     vim.cmd("hi clear")
   end
@@ -20,10 +21,9 @@ function M.apply(opts)
 
   for name, spec in pairs(groups) do
     if type(spec) == "string" then
-      vim.api.nvim_set_hl(0, name, { link = spec })
+      vim.api.nvim_set_hl(0, name, { link = spec, default = false })
     else
-      spec.default = false
-      vim.api.nvim_set_hl(0, name, spec)
+      vim.api.nvim_set_hl(0, name, vim.tbl_extend("force", spec, { default = false }))
     end
   end
 
