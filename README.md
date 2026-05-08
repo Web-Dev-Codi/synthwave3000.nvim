@@ -42,7 +42,7 @@ use {
 
 **vim-plug:**
 ```vim
-Plug 'Web-Dev-Codi/synthwave3000.nvim"
+Plug 'Web-Dev-Codi/synthwave3000.nvim'
 " After plug#end():
 lua require("synthwave3000").setup({}); vim.cmd.colorscheme("synthwave3000")
 ```
