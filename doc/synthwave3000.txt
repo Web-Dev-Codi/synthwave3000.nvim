@@ -1,0 +1,186 @@
+*synthwave3000.txt*    Synthwave '84-inspired colorscheme for Neovim
+
+==============================================================================
+CONTENTS                                                    *synthwave3000*
+
+1. Introduction ................. |synthwave3000-introduction|
+2. Installation ................. |synthwave3000-installation|
+3. Usage ........................ |synthwave3000-usage|
+4. Configuration ................ |synthwave3000-configuration|
+5. Light & Dark Mode ............ |synthwave3000-light-dark|
+6. Glow Effect .................. |synthwave3000-glow|
+7. Plugin Support ............... |synthwave3000-plugins|
+8. Customization ................ |synthwave3000-customization|
+
+==============================================================================
+INTRODUCTION                                    *synthwave3000-introduction*
+
+synthwave3000.nvim is a Neovim colorscheme inspired by Robb Owen's Synthwave
+'84 VS Code theme. It features:
+
+- Dark mode with the canonical Synthwave '84 palette
+- Light mode with an inverted variant
+- WCAG AA contrast compliance on all backgrounds
+- Full Neovim 0.10/0.11/0.12 compatibility
+- Support for 17+ popular plugins
+- Extensive customization options
+
+==============================================================================
+INSTALLATION                                        *synthwave3000-installation*
+
+lazy.nvim (recommended)~
+>lua
+  {
+    "Web-Dev-Codi/synthwave3000.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function(_, opts)
+      require("synthwave3000").setup(opts)
+      vim.cmd.colorscheme("synthwave3000")
+    end,
+  }
+<
+
+packer.nvim~
+>lua
+  use {
+    "Web-Dev-Codi/synthwave3000.nvim",
+    config = function()
+      require("synthwave3000").setup({})
+      vim.cmd.colorscheme("synthwave3000")
+    end,
+  }
+<
+
+vim-plug~
+>vim
+  Plug 'Web-Dev-Codi/synthwave3000.nvim'
+  " After plug#end():
+  lua require("synthwave3000").setup({}); vim.cmd.colorscheme("synthwave3000")
+<
+
+==============================================================================
+USAGE                                                      *synthwave3000-usage*
+
+The minimal setup:
+>lua
+  require("synthwave3000").setup()
+  vim.cmd.colorscheme("synthwave3000")
+<
+
+==============================================================================
+CONFIGURATION                                      *synthwave3000-configuration*
+
+>lua
+  require("synthwave3000").setup({
+    style = "auto",              -- "dark" | "light" | "auto"
+    transparent = false,         -- transparent background
+    terminal_colors = true,      -- set terminal colors
+    styles = {
+      comments = { italic = true },
+      keywords = { bold = true },
+      functions = { bold = true },
+      variables = {},
+      strings = {},
+      types = { bold = true },
+      operators = {},
+    },
+    glow = {
+      enabled = true,
+      brighten = 0.10,
+      background = false,
+    },
+    plugins = {
+      telescope = true,
+      nvim_tree = true,
+      neo_tree = true,
+      bufferline = true,
+      lualine = true,
+      gitsigns = true,
+      diffview = true,
+      cmp = true,
+      blink_cmp = true,
+      mini = true,
+      indent_blankline = true,
+      which_key = true,
+      noice = true,
+      notify = true,
+      trouble = true,
+      flash = true,
+      snacks = true,
+    },
+    on_colors = function(colors) end,
+    on_highlights = function(highlights, colors) end,
+  })
+<
+
+==============================================================================
+LIGHT & DARK MODE                                  *synthwave3000-light-dark*
+
+Set |synthwave3000-style| to "auto" and the colorscheme follows
+|vim.o.background|. Set to "dark" or "light" to lock one mode.
+
+The glow effect auto-disables in light mode.
+
+==============================================================================
+GLOW EFFECT                                               *synthwave3000-glow*
+
+The "glow" effect is an approximation of the VS Code Synthwave '84 CSS
+text-shadow. In a terminal, glow is simulated via bold + brightened foreground
+colors. Optionally, a faint background halo can be enabled.
+
+>lua
+  glow = {
+    enabled = true,
+    groups = { "Function", "Keyword", "Type", "@function", "@keyword", "@type" },
+    bold = true,
+    brighten = 0.10,
+    background = false,
+    bg_blend = 0.06,
+  }
+<
+
+Glow is auto-disabled in light mode.
+
+==============================================================================
+PLUGIN SUPPORT                                         *synthwave3000-plugins*
+
+Supported plugins (toggle via opts.plugins):
+- telescope.nvim
+- nvim-tree.lua
+- neo-tree.nvim
+- bufferline.nvim
+- lualine.nvim
+- gitsigns.nvim
+- diffview.nvim
+- nvim-cmp
+- blink.cmp
+- mini.nvim
+- indent-blankline.nvim
+- which-key.nvim
+- noice.nvim
+- nvim-notify
+- trouble.nvim
+- flash.nvim
+- snacks.nvim
+
+==============================================================================
+CUSTOMIZATION                                        *synthwave3000-customization*
+
+Override any highlight group via |on_highlights|:
+>lua
+  on_highlights = function(hl, c)
+    hl.Comment = { fg = c.comment, italic = false }
+    hl.Normal = { fg = c.fg, bg = "#000000" }
+  end
+<
+
+Override any color via |on_colors|:
+>lua
+  on_colors = function(c)
+    c.pink = "#ff69b4"
+  end
+<
+
+ vim:tw=78:ts=8:ft=help:norl:
