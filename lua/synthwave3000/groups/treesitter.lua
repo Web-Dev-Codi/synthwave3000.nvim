@@ -1,0 +1,132 @@
+local function build(p, o)
+  local util = require("synthwave3000.util")
+  local glow_enabled = o.glow.enabled and o.style == "dark"
+
+  local function maybe_glow(fg)
+    if glow_enabled then
+      return { fg = util.brighten(fg, o.glow.brighten), bold = o.glow.bold }
+    end
+    return { fg = fg }
+  end
+
+  local groups = {
+    ["@variable"] = { fg = p.pink },
+    ["@variable.builtin"] = { fg = p.red },
+    ["@variable.parameter"] = { fg = p.orange },
+    ["@variable.member"] = { fg = p.pink },
+    ["@constant"] = { fg = p.orange },
+    ["@constant.builtin"] = { fg = p.orange },
+    ["@constant.macro"] = { fg = p.yellow },
+    ["@module"] = { fg = p.purple },
+    ["@module.builtin"] = { fg = p.purple },
+    ["@label"] = { fg = p.pink },
+    ["@string"] = { fg = p.orange_bright },
+    ["@string.documentation"] = { fg = p.green, italic = true },
+    ["@string.regexp"] = { fg = p.orange },
+    ["@string.escape"] = { fg = p.cyan },
+    ["@string.special"] = { fg = p.green },
+    ["@string.special.symbol"] = { fg = p.pink },
+    ["@string.special.url"] = { fg = p.cyan, underline = true },
+    ["@character"] = { fg = p.orange },
+    ["@character.special"] = { fg = p.orange },
+    ["@boolean"] = { fg = p.orange },
+    ["@number"] = { fg = p.orange },
+    ["@number.float"] = { fg = p.orange },
+    ["@type"] = maybe_glow(p.red),
+    ["@type.builtin"] = maybe_glow(p.red),
+    ["@type.definition"] = maybe_glow(p.red),
+    ["@attribute"] = { fg = p.yellow },
+    ["@attribute.builtin"] = { fg = p.yellow },
+    ["@property"] = { fg = p.pink },
+    ["@function"] = maybe_glow(p.cyan),
+    ["@function.builtin"] = maybe_glow(p.cyan),
+    ["@function.call"] = maybe_glow(p.cyan),
+    ["@function.macro"] = { fg = p.yellow },
+    ["@function.method"] = maybe_glow(p.cyan),
+    ["@function.method.call"] = maybe_glow(p.cyan),
+    ["@constructor"] = { fg = p.yellow },
+    ["@operator"] = { fg = p.yellow },
+    ["@keyword"] = maybe_glow(p.yellow),
+    ["@keyword.coroutine"] = maybe_glow(p.yellow),
+    ["@keyword.function"] = maybe_glow(p.yellow),
+    ["@keyword.operator"] = maybe_glow(p.yellow),
+    ["@keyword.import"] = { fg = p.green },
+    ["@keyword.type"] = maybe_glow(p.red),
+    ["@keyword.modifier"] = maybe_glow(p.yellow),
+    ["@keyword.repeat"] = maybe_glow(p.yellow),
+    ["@keyword.return"] = maybe_glow(p.yellow),
+    ["@keyword.debug"] = { fg = p.orange },
+    ["@keyword.exception"] = maybe_glow(p.red),
+    ["@keyword.conditional"] = maybe_glow(p.yellow),
+    ["@keyword.conditional.ternary"] = maybe_glow(p.yellow),
+    ["@keyword.directive"] = { fg = p.purple },
+    ["@keyword.directive.define"] = { fg = p.purple },
+    ["@punctuation.delimiter"] = { fg = p.fg_dim },
+    ["@punctuation.bracket"] = { fg = p.fg_dim },
+    ["@punctuation.special"] = { fg = p.cyan },
+    ["@comment"] = { fg = p.comment, italic = o.styles.comments.italic ~= false },
+    ["@comment.documentation"] = { fg = p.comment, italic = true },
+    ["@comment.error"] = { fg = p.red, bold = true },
+    ["@comment.warning"] = { fg = p.yellow },
+    ["@comment.todo"] = { fg = p.orange, bold = true },
+    ["@comment.note"] = { fg = p.cyan, italic = true },
+    ["@markup.strong"] = { bold = true },
+    ["@markup.italic"] = { italic = true },
+    ["@markup.strikethrough"] = { strikethrough = true },
+    ["@markup.underline"] = { underline = true },
+    ["@markup.heading"] = { fg = p.pink, bold = true },
+    ["@markup.heading.1"] = { fg = p.pink, bold = true },
+    ["@markup.heading.2"] = { fg = p.cyan, bold = true },
+    ["@markup.heading.3"] = { fg = p.yellow, bold = true },
+    ["@markup.heading.4"] = { fg = p.pink, bold = true },
+    ["@markup.heading.5"] = { fg = p.cyan, bold = true },
+    ["@markup.heading.6"] = { fg = p.yellow, bold = true },
+    ["@markup.quote"] = { fg = p.fg_dim, italic = true },
+    ["@markup.math"] = { fg = p.orange },
+    ["@markup.environment"] = { fg = p.purple },
+    ["@markup.link"] = { fg = p.cyan, underline = true },
+    ["@markup.link.label"] = { fg = p.pink },
+    ["@markup.link.url"] = { fg = p.cyan, underline = true },
+    ["@markup.raw"] = { fg = p.green },
+    ["@markup.raw.block"] = { fg = p.green },
+    ["@markup.list"] = { fg = p.cyan },
+    ["@markup.list.checked"] = { fg = p.green },
+    ["@markup.list.unchecked"] = { fg = p.fg_dim },
+    ["@diff.plus"] = { fg = p.green },
+    ["@diff.minus"] = { fg = p.red },
+    ["@diff.delta"] = { fg = p.yellow },
+    ["@tag"] = { fg = p.green },
+    ["@tag.builtin"] = { fg = p.red },
+    ["@tag.attribute"] = { fg = p.yellow },
+    ["@tag.delimiter"] = { fg = p.fg_dim },
+  }
+
+  local aliases = {
+    ["@text"] = "@markup",
+    ["@text.literal"] = "@markup.raw",
+    ["@text.reference"] = "@markup.link",
+    ["@text.title"] = "@markup.heading",
+    ["@text.uri"] = "@markup.link.url",
+    ["@text.underline"] = "@markup.underline",
+    ["@text.todo"] = "@comment.todo",
+    ["@text.note"] = "@comment.note",
+    ["@text.warning"] = "@comment.warning",
+    ["@text.danger"] = "@comment.error",
+    ["@text.diff.add"] = "@diff.plus",
+    ["@text.diff.delete"] = "@diff.minus",
+    ["@punctuation.special"] = "@markup.list",
+    ["@string.regex"] = "@string.regexp",
+    ["@parameter"] = "@variable.parameter",
+    ["@field"] = "@variable.member",
+    ["@namespace"] = "@module",
+    ["@symbol"] = "@string.special.symbol",
+  }
+
+  for old, new in pairs(aliases) do
+    groups[old] = new
+  end
+
+  return groups
+end
+
+return { build = build }
