@@ -70,6 +70,9 @@ function M.darken(hex, amount)
 end
 
 function M.blend(fg_hex, bg_hex, alpha)
+  if fg_hex == "NONE" or bg_hex == "NONE" then
+    return fg_hex
+  end
   local fr, fg, fb = M.hex_to_rgb(fg_hex)
   local br, bg, bb = M.hex_to_rgb(bg_hex)
   local function blend_channel(f, b)
