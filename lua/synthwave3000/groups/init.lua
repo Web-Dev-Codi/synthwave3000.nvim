@@ -62,6 +62,33 @@ function M.build(palette, opts)
   if opts.plugins.snacks then
     merge(require("synthwave3000.groups.plugins.snacks").build(palette, opts))
   end
+  if opts.plugins.dashboard then
+    merge(require("synthwave3000.groups.plugins.dashboard").build(palette, opts))
+  end
+  if opts.plugins.aerial then
+    merge(require("synthwave3000.groups.plugins.aerial").build(palette, opts))
+  end
+  if opts.plugins.dap then
+    merge(require("synthwave3000.groups.plugins.dap").build(palette, opts))
+  end
+  if opts.plugins.hop then
+    merge(require("synthwave3000.groups.plugins.hop").build(palette, opts))
+  end
+  if opts.plugins.leap then
+    merge(require("synthwave3000.groups.plugins.leap").build(palette, opts))
+  end
+  if opts.plugins.neogit then
+    merge(require("synthwave3000.groups.plugins.neogit").build(palette, opts))
+  end
+  if opts.plugins.render_markdown then
+    merge(require("synthwave3000.groups.plugins.render-markdown").build(palette, opts))
+  end
+  if opts.plugins.todo_comments then
+    merge(require("synthwave3000.groups.plugins.todo-comments").build(palette, opts))
+  end
+  if opts.plugins.dressing then
+    merge(require("synthwave3000.groups.plugins.dressing").build(palette, opts))
+  end
 
   return groups
 end

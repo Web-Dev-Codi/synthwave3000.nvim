@@ -1,0 +1,45 @@
+local function build(p, o)
+  local bg = o.transparent and "NONE" or p.bg
+  local util = require("synthwave3000.util")
+  return {
+    RenderMarkdownH1 = { fg = p.pink, bold = true },
+    RenderMarkdownH2 = { fg = p.red, bold = true },
+    RenderMarkdownH3 = { fg = p.orange, bold = true },
+    RenderMarkdownH4 = { fg = p.yellow, bold = true },
+    RenderMarkdownH5 = { fg = p.green, bold = true },
+    RenderMarkdownH6 = { fg = p.cyan, bold = true },
+    RenderMarkdownH1Bg = { bg = util.blend(p.pink, bg, 0.1) },
+    RenderMarkdownH2Bg = { bg = util.blend(p.red, bg, 0.1) },
+    RenderMarkdownH3Bg = { bg = util.blend(p.orange, bg, 0.1) },
+    RenderMarkdownH4Bg = { bg = util.blend(p.yellow, bg, 0.1) },
+    RenderMarkdownH5Bg = { bg = util.blend(p.green, bg, 0.1) },
+    RenderMarkdownH6Bg = { bg = util.blend(p.cyan, bg, 0.1) },
+    RenderMarkdownCode = { bg = p.bg_highlight },
+    RenderMarkdownCodeBorder = { bg = p.bg_highlight },
+    RenderMarkdownCodeInfo = { fg = p.cyan },
+    RenderMarkdownCodeInline = { fg = p.pink, bg = p.bg_highlight },
+    RenderMarkdownQuote = { fg = p.purple },
+    RenderMarkdownBullet = { fg = p.pink },
+    RenderMarkdownDash = { fg = p.comment },
+    RenderMarkdownMath = { fg = p.cyan },
+    RenderMarkdownLink = { fg = p.cyan, underline = true },
+    RenderMarkdownLinkTitle = { fg = p.cyan },
+    RenderMarkdownWikiLink = { fg = p.cyan, underline = true },
+    RenderMarkdownUnchecked = { fg = p.orange },
+    RenderMarkdownChecked = { fg = p.green },
+    RenderMarkdownTodo = { fg = p.yellow, bold = true },
+    RenderMarkdownTableHead = { fg = p.cyan },
+    RenderMarkdownTableRow = { fg = p.fg },
+    RenderMarkdownSuccess = { fg = p.green },
+    RenderMarkdownInfo = { fg = p.cyan },
+    RenderMarkdownHint = { fg = p.purple },
+    RenderMarkdownWarn = { fg = p.yellow },
+    RenderMarkdownError = { fg = p.red },
+    RenderMarkdownIndent = { fg = p.bg_highlight },
+    RenderMarkdownSign = { fg = p.comment },
+    RenderMarkdownHtmlComment = { fg = p.comment },
+    RenderMarkdownInlineHighlight = { fg = p.pink, bg = p.bg_highlight },
+  }
+end
+
+return { build = build }

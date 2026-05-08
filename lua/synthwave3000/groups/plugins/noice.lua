@@ -19,6 +19,19 @@ local function build(p, o)
     NoicePopupmenuMatch = { fg = p.cyan, bold = true },
     NoicePopupmenuSelected = { fg = p.fg, bg = p.bg_highlight },
     NoiceVirtualText = { fg = p.comment },
+    NoiceFormatConfirm = { fg = p.green },
+    NoiceFormatDebug = { fg = p.comment },
+    NoiceFormatDate = { fg = p.comment },
+    NoiceFormatError = { fg = p.red },
+    NoiceFormatEvent = { fg = p.cyan },
+    NoiceFormatKind = { fg = p.purple },
+    NoiceFormatLevel = { fg = p.pink },
+    NoiceFormatProgressTitle = { fg = p.fg },
+    NoiceFormatTitle = { fg = p.cyan },
+    NoiceFormatTrace = { fg = p.comment },
+    NoiceFormatWarning = { fg = p.yellow },
+    NoiceScrollbarThumb = { bg = p.selection },
+    NoiceScrollbarTrack = { bg = p.bg_highlight },
   }
 end
 

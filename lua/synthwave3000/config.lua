@@ -42,6 +42,15 @@ M.defaults = {
     trouble = true,
     flash = true,
     snacks = true,
+    dashboard = true,
+    aerial = true,
+    dap = true,
+    hop = true,
+    leap = true,
+    neogit = true,
+    render_markdown = true,
+    todo_comments = true,
+    dressing = true,
   },
 }
 

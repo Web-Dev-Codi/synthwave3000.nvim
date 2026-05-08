@@ -19,6 +19,22 @@ local function build(p, o)
     TelescopeMultiIcon = { fg = p.orange },
     TelescopeMatching = { fg = p.cyan },
     TelescopeTitle = { fg = p.bg, bg = p.pink },
+    TelescopeResultsDiffAdd = { fg = p.green },
+    TelescopeResultsDiffChange = { fg = p.yellow },
+    TelescopeResultsDiffDelete = { fg = p.red },
+    TelescopeResultsClass = { fg = p.red },
+    TelescopeResultsConstant = { fg = p.orange },
+    TelescopeResultsField = { fg = p.cyan },
+    TelescopeResultsFunction = { fg = p.cyan },
+    TelescopeResultsMethod = { fg = p.cyan },
+    TelescopeResultsOperator = { fg = p.yellow },
+    TelescopeResultsStruct = { fg = p.red },
+    TelescopeResultsVariable = { fg = p.pink },
+    TelescopeResultsNumber = { fg = p.orange },
+    TelescopeResultsComment = { fg = p.comment },
+    TelescopeResultsSpecialComment = { fg = p.comment },
+    TelescopePreviewHyphen = { fg = p.comment },
+    TelescopePreviewDate = { fg = p.cyan },
   }
 end
 
