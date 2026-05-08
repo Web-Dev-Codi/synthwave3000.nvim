@@ -1,0 +1,35 @@
+local function build(p, o)
+  return {
+    GitSignsAdd = { fg = p.green },
+    GitSignsChange = { fg = p.yellow },
+    GitSignsDelete = { fg = p.red },
+    GitSignsTopdelete = { fg = p.red },
+    GitSignsChangedelete = { fg = p.orange },
+    GitSignsUntracked = { fg = p.comment },
+    GitSignsAddNr = { fg = p.green },
+    GitSignsChangeNr = { fg = p.yellow },
+    GitSignsDeleteNr = { fg = p.red },
+    GitSignsAddLn = { fg = p.green },
+    GitSignsChangeLn = { fg = p.yellow },
+    GitSignsDeleteLn = { fg = p.red },
+    GitSignsAddInline = { fg = p.green },
+    GitSignsChangeInline = { fg = p.yellow },
+    GitSignsDeleteInline = { fg = p.red },
+    GitSignsAddLnInline = { fg = p.green },
+    GitSignsChangeLnInline = { fg = p.yellow },
+    GitSignsDeleteLnInline = { fg = p.red },
+    GitSignsAddPreview = { fg = p.green, bg = p.bg_highlight },
+    GitSignsDeletePreview = { fg = p.red, bg = p.bg_highlight },
+    GitSignsCurrentLineBlame = { fg = p.comment, italic = true },
+    GitSignsAddVirtLn = { fg = p.green },
+    GitSignsChangeVirtLn = { fg = p.yellow },
+    GitSignsDeleteVirtLn = { fg = p.red },
+    GitSignsStagedAdd = { fg = p.green },
+    GitSignsStagedChange = { fg = p.yellow },
+    GitSignsStagedDelete = { fg = p.red },
+    GitSignsStagedTopdelete = { fg = p.red },
+    GitSignsStagedChangedelete = { fg = p.orange },
+  }
+end
+
+return { build = build }

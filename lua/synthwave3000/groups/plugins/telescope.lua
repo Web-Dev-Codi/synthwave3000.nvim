@@ -1,0 +1,25 @@
+local function build(p, o)
+  return {
+    TelescopeNormal = { fg = p.fg, bg = p.bg_dark },
+    TelescopeBorder = { fg = p.bg_highlight, bg = p.bg_dark },
+    TelescopePromptNormal = { fg = p.fg, bg = p.bg_panel },
+    TelescopePromptBorder = { fg = p.bg_highlight, bg = p.bg_panel },
+    TelescopePromptTitle = { fg = p.bg, bg = p.pink },
+    TelescopePromptCounter = { fg = p.fg_dim },
+    TelescopePromptPrefix = { fg = p.pink },
+    TelescopePreviewNormal = { fg = p.fg, bg = p.bg },
+    TelescopePreviewBorder = { fg = p.bg_highlight, bg = p.bg },
+    TelescopePreviewTitle = { fg = p.bg, bg = p.green },
+    TelescopeResultsNormal = { fg = p.fg, bg = p.bg_dark },
+    TelescopeResultsBorder = { fg = p.bg_highlight, bg = p.bg_dark },
+    TelescopeResultsTitle = { fg = p.bg, bg = p.cyan },
+    TelescopeSelection = { fg = p.fg, bg = p.bg_highlight },
+    TelescopeSelectionCaret = { fg = p.pink },
+    TelescopeMultiSelection = { fg = p.fg, bg = p.bg_highlight },
+    TelescopeMultiIcon = { fg = p.orange },
+    TelescopeMatching = { fg = p.cyan },
+    TelescopeTitle = { fg = p.bg, bg = p.pink },
+  }
+end
+
+return { build = build }

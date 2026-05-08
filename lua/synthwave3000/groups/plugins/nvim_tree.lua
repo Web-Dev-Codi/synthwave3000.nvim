@@ -1,0 +1,40 @@
+local function build(p, o)
+  local bg = o.transparent and "NONE" or p.bg_dark
+  return {
+    NvimTreeNormal = { fg = p.fg, bg = bg },
+    NvimTreeNormalFloat = { fg = p.fg, bg = bg },
+    NvimTreeNormalNC = { fg = p.fg, bg = bg },
+    NvimTreeLineNr = { fg = p.comment },
+    NvimTreeWinSeparator = { fg = p.bg_highlight, bg = bg },
+    NvimTreeEndOfBuffer = { fg = bg, bg = bg },
+    NvimTreePopup = { fg = p.fg, bg = p.bg_panel },
+    NvimTreeSignColumn = { bg = bg },
+    NvimTreeCursorColumn = { bg = p.bg_highlight },
+    NvimTreeCursorLine = { bg = p.bg_highlight },
+    NvimTreeCursorLineNr = { fg = p.pink },
+    NvimTreeStatusLine = { fg = p.fg_dim, bg = p.bg_darker },
+    NvimTreeStatusLineNC = { fg = p.fg_dim, bg = p.bg_darker },
+    NvimTreeFolderName = { fg = p.cyan },
+    NvimTreeOpenedFolderName = { fg = p.cyan },
+    NvimTreeEmptyFolderName = { fg = p.comment },
+    NvimTreeFolderIcon = { fg = p.cyan },
+    NvimTreeRootFolder = { fg = p.pink, bold = true },
+    NvimTreeSymlink = { fg = p.cyan },
+    NvimTreeExecFile = { fg = p.green },
+    NvimTreeFileIcon = { fg = p.fg },
+    NvimTreeOpenedFile = { fg = p.pink },
+    NvimTreeOpenedHL = { fg = p.pink },
+    NvimTreeModifiedFile = { fg = p.orange },
+    NvimTreeGitDirty = { fg = p.yellow },
+    NvimTreeGitStaged = { fg = p.green },
+    NvimTreeGitMerge = { fg = p.purple },
+    NvimTreeGitRenamed = { fg = p.purple },
+    NvimTreeGitNew = { fg = p.green },
+    NvimTreeGitDeleted = { fg = p.red },
+    NvimTreeGitIgnored = { fg = p.comment },
+    NvimTreeWindowPicker = { fg = p.pink, bg = p.bg_highlight },
+    NvimTreeIndentMarker = { fg = p.comment },
+  }
+end
+
+return { build = build }

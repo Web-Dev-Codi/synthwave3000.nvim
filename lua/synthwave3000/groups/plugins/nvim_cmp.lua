@@ -1,0 +1,38 @@
+local function build(p, o)
+  return {
+    CmpItemAbbr = { fg = p.fg },
+    CmpItemAbbrDeprecated = { fg = p.fg_dim, strikethrough = true },
+    CmpItemAbbrMatch = { fg = p.cyan, bold = true },
+    CmpItemAbbrMatchFuzzy = { fg = p.cyan, bold = true },
+    CmpItemMenu = { fg = p.fg_dim },
+    CmpItemKindDefault = { fg = p.fg_dim },
+    CmpItemKindText = { fg = p.orange_bright },
+    CmpItemKindMethod = { fg = p.cyan },
+    CmpItemKindFunction = { fg = p.cyan },
+    CmpItemKindConstructor = { fg = p.yellow },
+    CmpItemKindField = { fg = p.pink },
+    CmpItemKindVariable = { fg = p.pink },
+    CmpItemKindClass = { fg = p.red },
+    CmpItemKindInterface = { fg = p.red },
+    CmpItemKindModule = { fg = p.purple },
+    CmpItemKindProperty = { fg = p.pink },
+    CmpItemKindUnit = { fg = p.orange },
+    CmpItemKindValue = { fg = p.orange },
+    CmpItemKindEnum = { fg = p.red },
+    CmpItemKindKeyword = { fg = p.yellow },
+    CmpItemKindSnippet = { fg = p.orange },
+    CmpItemKindColor = { fg = p.pink },
+    CmpItemKindFile = { fg = p.cyan },
+    CmpItemKindReference = { fg = p.pink },
+    CmpItemKindFolder = { fg = p.cyan },
+    CmpItemKindEnumMember = { fg = p.red },
+    CmpItemKindConstant = { fg = p.orange },
+    CmpItemKindStruct = { fg = p.red },
+    CmpItemKindEvent = { fg = p.yellow },
+    CmpItemKindOperator = { fg = p.yellow },
+    CmpItemKindTypeParameter = { fg = p.red },
+    CmpItemKindCopilot = { fg = p.green },
+  }
+end
+
+return { build = build }
