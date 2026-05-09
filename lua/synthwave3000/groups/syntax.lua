@@ -1,14 +1,5 @@
 local function build(p, o)
   local util = require("synthwave3000.util")
-  local glow_enabled = o.glow.enabled and o.style == "dark"
-
-  local function maybe_glow(fg)
-    if glow_enabled then
-      return { fg = util.brighten(fg, o.glow.brighten), bold = o.glow.bold }
-    end
-    return { fg = fg }
-  end
-
   return {
     Comment = { fg = p.comment, italic = o.styles.comments.italic ~= false },
     Constant = { fg = p.orange },
@@ -18,23 +9,23 @@ local function build(p, o)
     Boolean = { fg = p.orange },
     Float = { fg = p.orange },
     Identifier = { fg = p.pink },
-    Function = maybe_glow(p.cyan),
+    Function = { fg = p.cyan, bold = o.styles.functions.bold },
     Statement = { fg = p.yellow },
-    Conditional = maybe_glow(p.yellow),
-    Repeat = maybe_glow(p.yellow),
+    Conditional = { fg = p.yellow, bold = o.styles.keywords.bold },
+    Repeat = { fg = p.yellow, bold = o.styles.keywords.bold },
     Label = { fg = p.pink },
     Operator = { fg = p.yellow },
-    Keyword = maybe_glow(p.yellow),
-    Exception = maybe_glow(p.red),
+    Keyword = { fg = p.yellow, bold = o.styles.keywords.bold },
+    Exception = { fg = p.red, bold = o.styles.keywords.bold },
     PreProc = { fg = p.purple },
     Include = { fg = p.green },
     Define = { fg = p.yellow },
     Macro = { fg = p.yellow },
     PreCondit = { fg = p.purple },
-    Type = maybe_glow(p.red),
-    StorageClass = maybe_glow(p.red),
-    Structure = maybe_glow(p.red),
-    Typedef = maybe_glow(p.red),
+    Type = { fg = p.red, bold = o.styles.types.bold },
+    StorageClass = { fg = p.red, bold = o.styles.types.bold },
+    Structure = { fg = p.red, bold = o.styles.types.bold },
+    Typedef = { fg = p.red, bold = o.styles.types.bold },
     Special = { fg = p.pink },
     SpecialChar = { fg = p.orange },
     Tag = { fg = p.green },

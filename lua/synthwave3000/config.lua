@@ -14,11 +14,6 @@ M.defaults = {
 		types = { bold = true },
 		operators = {},
 	},
-	glow = {
-		enabled = true,
-		bold = true,
-		brighten = 0.10,
-	},
 	on_colors = nil,
 	on_highlights = nil,
 	plugins = {
@@ -26,7 +21,6 @@ M.defaults = {
 		nvim_tree = true,
 		neo_tree = true,
 		bufferline = true,
-		lualine = true,
 		gitsigns = true,
 		diffview = true,
 		cmp = true,

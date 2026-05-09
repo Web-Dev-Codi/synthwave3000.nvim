@@ -7,12 +7,12 @@ Dark mode with the canonical Synthwave '84 palette + light mode with an inverted
 ## Features
 
 - Dark + Light mode with `style = "auto" | "dark" | "light"`
-- Synthwave "glow" effect approximation (bold + HSL-brightened foreground on keywords/functions/types)
 - Transparent background support — affects Normal, sidebars, floats, and statusline section C
 - WCAG AA contrast (>=4.5:1) on all backgrounds
 - Neovim 0.10/0.11/0.12 compatible
 - 21 plugin integrations with per-plugin toggles
 - Fully customizable via `on_colors` and `on_highlights`
+- Lualine theme shipped at standard `lua/lualine/themes/` path for auto-discovery
 
 ## Installation
 
@@ -54,10 +54,21 @@ lua require("synthwave3000").setup({}); vim.cmd.colorscheme("synthwave3000")
 require("synthwave3000").setup({
   style = "auto",
   transparent = false,
-  glow = { enabled = true },
 })
 vim.cmd.colorscheme("synthwave3000")
 ```
+
+### Lualine
+
+The theme ships a lualine theme file at `lua/lualine/themes/synthwave3000.lua`. Lualine auto-discovers it via the standard theme path convention:
+
+```lua
+require("lualine").setup({
+  options = { theme = "synthwave3000" },
+})
+```
+
+The lualine theme respects `transparent` and `background` from your colorscheme config.
 
 ## Configuration
 
@@ -69,13 +80,12 @@ vim.cmd.colorscheme("synthwave3000")
 | `transparent` | `false` | Transparent backgrounds for Normal, sidebars, floats, and statusline section C |
 | `background` | `nil` | Override the Normal background color (nil = use palette default) |
 | `terminal_colors` | `true` | Set terminal ANSI color palette |
-| `glow.enabled` | `true` | Synthwave glow — brightens fg + applies bold to keywords/functions/types |
-| `glow.brighten` | `0.10` | HSL lightness boost factor for glow groups |
-| `glow.bold` | `true` | Apply bold styling to glow groups |
 | `on_colors` | `nil` | `function(palette)` — mutate the palette before highlight generation |
 | `on_highlights` | `nil` | `function(groups, palette)` — override highlight groups directly |
 
 ### Styles
+
+Styling rules for syntax categories. Bold and italic preferences are applied to the corresponding highlight groups.
 
 ```lua
 styles = {
@@ -106,7 +116,7 @@ Each plugin integration can be independently enabled or disabled:
 ```lua
 plugins = {
   telescope = true, nvim_tree = true, neo_tree = true,
-  bufferline = true, lualine = true, gitsigns = true,
+  bufferline = true, gitsigns = true,
   diffview = true, cmp = true, blink_cmp = true,
   mini = true, indent_blankline = true, which_key = true,
   noice = true, notify = true, trouble = true,
@@ -115,6 +125,8 @@ plugins = {
   render_markdown = true,
 }
 ```
+
+Note: Lualine does not appear in plugin toggles — it auto-discovers the theme file at `lua/lualine/themes/synthwave3000.lua`. Set `theme = "synthwave3000"` in your lualine config.
 
 ### Customization
 
@@ -144,13 +156,13 @@ end
 | `fg_dim` | `#b6b1b1` | Dimmed / inactive text |
 | `comment` | `#848bbd` | Comments |
 | `pink` | `#FF00FF` | Accent — borders, titles, selection |
-| `cyan` | `#00FFFF` | Strings, special values, links |
+| `cyan` | `#00FFFF` | Functions, special values, links |
 | `green` | `#33FF33` | Added / success / git staged |
-| `yellow` | `#fede5d` | Warnings / changed / modified |
+| `yellow` | `#fede5d` | Warnings / changed / keywords |
 | `orange` | `#f97e72` | Unsaved changes / operators |
 | `orange_bright` | `#ff8b39` | Bright orange accent |
-| `red` | `#fe4450` | Errors / deleted / removed |
-| `purple` | `#8C1EFF` | Keywords / special identifiers |
+| `red` | `#fe4450` | Errors / deleted / types |
+| `purple` | `#8C1EFF` | Special identifiers / modules |
 | `blue` | `#03edf9` | Blue accent |
 | `selection` | `#463465` | Selection / scrollbar thumb |
 | `none` | `"NONE"` | Transparent sentinel |
@@ -169,25 +181,16 @@ end
 | `fg_dim` | `#5a5a7a` | Dimmed / inactive text |
 | `comment` | `#7c7fa0` | Comments |
 | `pink` | `#c445a3` | Accent — borders, titles, selection |
-| `cyan` | `#007777` | Strings, special values, links |
+| `cyan` | `#007777` | Functions, special values, links |
 | `green` | `#2d8f5e` | Added / success / git staged |
-| `yellow` | `#b0901f` | Warnings / changed / modified |
+| `yellow` | `#b0901f` | Warnings / changed / keywords |
 | `orange` | `#c0552a` | Unsaved changes / operators |
 | `orange_bright` | `#d4652a` | Bright orange accent |
-| `red` | `#c62828` | Errors / deleted / removed |
-| `purple` | `#7c5295` | Keywords / special identifiers |
+| `red` | `#c62828` | Errors / deleted / types |
+| `purple` | `#7c5295` | Special identifiers / modules |
 | `blue` | `#0288d1` | Blue accent |
 | `selection` | `#d0c0e8` | Selection / scrollbar thumb |
 | `none` | `"NONE"` | Transparent sentinel |
-
-## Glow Effect
-
-The "glow" effect is an approximation of the VS Code Synthwave '84 CSS `text-shadow`. Since Neovim renders text via a cell-based terminal grid — not a GPU compositing pipeline — true glow/bloom is not possible. Instead:
-
-- **Foreground brightening**: `util.brighten(color, amount)` boosts the HSL lightness of `Keyword`, `Function`, `Type`, and their treesitter equivalents by `glow.brighten` (default 0.10).
-- **Bold**: Groups with glow get `bold = true` by default.
-
-Glow is **auto-disabled in light mode** (`style = "light"` or `vim.o.background == "light"`) because brightened colors against a light background would lose contrast.
 
 ## Supported Plugins
 
@@ -197,7 +200,7 @@ Glow is **auto-disabled in light mode** (`style = "light"` or `vim.o.background 
 | nvim-tree.lua | `plugins.nvim_tree` | 40+ groups — file tree, git icons |
 | neo-tree.nvim | `plugins.neo_tree` | Float border, normal, indent markers |
 | bufferline.nvim | `plugins.bufferline` | 40+ groups — tabs, separators, diagnostics, modified |
-| lualine.nvim | `plugins.lualine` | Theme table — all modes, inactive |
+| lualine.nvim | *(auto-discovered)* | Theme table at `lua/lualine/themes/` — all modes, inactive |
 | gitsigns.nvim | `plugins.gitsigns` | Sign column, diff hunks |
 | diffview.nvim | `plugins.diffview` | Diff panel backgrounds |
 | nvim-cmp | `plugins.cmp` | Completion menu, documentation |
@@ -225,9 +228,11 @@ When `transparent = true`:
 | `Normal`, `NormalNC` | `bg = "NONE"` |
 | `NormalFloat`, sidebars (`SignColumn`, `FoldColumn`) | `bg = "NONE"` |
 | `StatusLine`, `WinBar`, `TabLine` section C | `bg = "NONE"` |
+| Lualine section C | `bg = "NONE"` |
 | `Pmenu`, floating windows | Use palette `bg_panel` (keeps readability) |
 | Bufferline section A, B | Keep colored backgrounds for visual distinction |
 | Statusline section A (mode indicator) | Keep colored background |
+| Lualine sections A, B | Keep colored backgrounds for visual distinction |
 
 Border colors are not affected by transparency — they remain `pink` regardless.
 

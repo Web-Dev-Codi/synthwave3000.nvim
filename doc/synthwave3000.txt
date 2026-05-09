@@ -9,7 +9,7 @@ CONTENTS                                                    *synthwave3000*
 4. Configuration ................ |synthwave3000-configuration|
 5. Palette ...................... |synthwave3000-palette|
 6. Light & Dark Mode ............ |synthwave3000-light-dark|
-7. Glow Effect .................. |synthwave3000-glow|
+7. Lualine Integration .......... |synthwave3000-lualine|
 8. Plugin Support ............... |synthwave3000-plugins|
 9. Transparency ................. |synthwave3000-transparent|
 10. Customization ................ |synthwave3000-customization|
@@ -22,14 +22,13 @@ synthwave3000.nvim is a Neovim colorscheme inspired by Robb Owen's Synthwave
 
 - Dark mode with the canonical Synthwave '84 palette (#262335 background)
 - Light mode with an inverted variant (#f5f0ff background)
-- Synthwave "glow" effect: bold + HSL-brightened foreground on keywords,
-  functions, and types (auto-disabled in light mode)
 - WCAG AA contrast compliance (>=4.5:1) on all backgrounds
 - Full Neovim 0.10/0.11/0.12 compatibility
 - 21 plugin integrations with per-plugin toggle options
 - Transparent background support — Normal, sidebars, floats, statusline
   section C all become "NONE" when enabled
 - All structural borders use the signature pink (#FF00FF) accent
+- Lualine theme shipped at standard `lua/lualine/themes/` path
 - Customizable via |on_colors| palette mutation and |on_highlights| override
 
 ==============================================================================
@@ -95,17 +94,11 @@ Full configuration with all defaults:
       types      = { bold = true },
       operators  = {},
     },
-    glow = {
-      enabled    = true,         -- enable glow for keywords/functions/types
-      bold       = true,         -- apply bold to glow groups
-      brighten   = 0.10,         -- HSL lightness boost (0.0 - 1.0)
-    },
     plugins = {
       telescope        = true,
       nvim_tree        = true,
       neo_tree         = true,
       bufferline       = true,
-      lualine          = true,
       gitsigns         = true,
       diffview         = true,
       cmp              = true,
@@ -147,13 +140,13 @@ Dark mode colors:                                          *synthwave3000-dark*
     fg_dim         = "#b6b1b1"   -- dimmed / inactive text
     comment        = "#848bbd"   -- comments
     pink           = "#FF00FF"   -- accent: borders, titles, selection
-    cyan           = "#00FFFF"   -- strings, special values, links
+    cyan           = "#00FFFF"   -- functions, special values, links
     green          = "#33FF33"   -- added / success / git staged
-    yellow         = "#fede5d"   -- warnings / changed / modified
+    yellow         = "#fede5d"   -- warnings / changed / keywords
     orange         = "#f97e72"   -- unsaved changes / operators
     orange_bright  = "#ff8b39"   -- bright orange accent
-    red            = "#fe4450"   -- errors / deleted / removed
-    purple         = "#8C1EFF"   -- keywords / special identifiers
+    red            = "#fe4450"   -- errors / deleted / types
+    purple         = "#8C1EFF"   -- special identifiers / modules
     blue           = "#03edf9"   -- blue accent
     selection      = "#463465"   -- scrollbar thumb
     none           = "NONE"      -- transparent sentinel
@@ -191,37 +184,34 @@ Set |synthwave3000-style| to "auto" and the colorscheme follows
 is loaded; otherwise the dark palette is used. Set style to "dark" or
 "light" to lock one mode.
 
-The glow effect auto-disables in light mode because brightened colors
-would lose contrast against a light background.
-
 ==============================================================================
-GLOW EFFECT                                               *synthwave3000-glow*
+LUALINE INTEGRATION                                    *synthwave3000-lualine*
 
-The "glow" effect is an approximation of the VS Code Synthwave '84 CSS
-text-shadow. Since Neovim renders text via a cell-based terminal grid
-(one foreground + one background per cell), true GPU-composited glow,
-bloom, or blur effects are not possible. No terminal emulator, SGR
-escape code, or Neovim 0.12 highlight attribute supports glow rendering.
-
-Instead, glow is simulated through two mechanisms applied to
-|synthwave3000-glow-groups|:
-
-1. **Foreground brightening** — `util.brighten(color, amount)` boosts
-   the HSL lightness of affected groups by `glow.brighten` (default 0.10).
-2. **Bold** — groups with glow get `bold = true` by default.
-
-Affected groups: Keyword, Function, Type, and their treesitter
-equivalents (@keyword, @function, @type, and related captures).
-
-Configuration:
+A lualine theme is shipped at the standard auto-discovery path:
+`lua/lualine/themes/synthwave3000.lua`. Set the theme in your lualine
+config:
 >lua
-  glow = {
-    enabled    = true,      -- toggle glow on/off
-    bold       = true,      -- apply bold style
-    brighten   = 0.10,      -- HSL lightness boost (0.0 - 1.0)
-  }
+  require("lualine").setup({
+    options = { theme = "synthwave3000" },
+  })
 <
-Glow is auto-disabled in light mode.
+
+The lualine theme respects the colorscheme's `transparent` and
+`background` options. When `transparent = true`, section C (and `x` by
+mapping) gets `bg = "NONE"`. Sections A and B keep colored backgrounds
+for visual distinction.
+
+Mode accent colors:
+  normal    → pink
+  insert    → cyan
+  visual    → purple
+  replace   → orange
+  command   → yellow
+  terminal  → green
+  inactive  → dimmed across all sections
+
+Sections x, y, z are handled automatically by lualine's internal
+mapping (x→c, y→b, z→a). No additional configuration is needed.
 
 ==============================================================================
 PLUGIN SUPPORT                                         *synthwave3000-plugins*
@@ -234,7 +224,7 @@ Supported plugins. Each can be toggled via opts.plugins.<key>:
     nvim-tree.lua           plugins.nvim_tree
     neo-tree.nvim           plugins.neo_tree
     bufferline.nvim         plugins.bufferline
-    lualine.nvim            plugins.lualine
+    lualine.nvim            (auto-discovered)
     gitsigns.nvim           plugins.gitsigns
     diffview.nvim           plugins.diffview
     nvim-cmp                plugins.cmp
@@ -276,9 +266,11 @@ When `transparent = true` is set:
     StatusLine section C              "NONE"
     WinBar section C                  "NONE"
     TabLine / TabLineFill section C   "NONE"
+    Lualine section C                 "NONE"
     StatusLine section A (mode)       Keeps colored bg
     Pmenu / floating panel            Keeps palette bg for readability
     Bufferline section A, B           Keeps colored bg for distinction
+    Lualine sections A, B             Keeps colored bg for distinction
     Border fg colors                  Unaffected (stay pink)
 
 To override Normal background independently of transparency, use the

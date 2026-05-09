@@ -1,14 +1,4 @@
 local function build(p, o)
-  local util = require("synthwave3000.util")
-  local glow_enabled = o.glow.enabled and o.style == "dark"
-
-  local function maybe_glow(fg)
-    if glow_enabled then
-      return { fg = util.brighten(fg, o.glow.brighten), bold = o.glow.bold }
-    end
-    return { fg = fg }
-  end
-
   local groups = {
     ["@variable"] = { fg = p.pink },
     ["@variable.builtin"] = { fg = p.red },
@@ -32,33 +22,33 @@ local function build(p, o)
     ["@boolean"] = { fg = p.orange },
     ["@number"] = { fg = p.orange },
     ["@number.float"] = { fg = p.orange },
-    ["@type"] = maybe_glow(p.red),
-    ["@type.builtin"] = maybe_glow(p.red),
-    ["@type.definition"] = maybe_glow(p.red),
+    ["@type"] = { fg = p.red, bold = o.styles.types.bold },
+    ["@type.builtin"] = { fg = p.red, bold = o.styles.types.bold },
+    ["@type.definition"] = { fg = p.red, bold = o.styles.types.bold },
     ["@attribute"] = { fg = p.yellow },
     ["@attribute.builtin"] = { fg = p.yellow },
     ["@property"] = { fg = p.pink },
-    ["@function"] = maybe_glow(p.cyan),
-    ["@function.builtin"] = maybe_glow(p.cyan),
-    ["@function.call"] = maybe_glow(p.cyan),
+    ["@function"] = { fg = p.cyan, bold = o.styles.functions.bold },
+    ["@function.builtin"] = { fg = p.cyan, bold = o.styles.functions.bold },
+    ["@function.call"] = { fg = p.cyan, bold = o.styles.functions.bold },
     ["@function.macro"] = { fg = p.yellow },
-    ["@function.method"] = maybe_glow(p.cyan),
-    ["@function.method.call"] = maybe_glow(p.cyan),
+    ["@function.method"] = { fg = p.cyan, bold = o.styles.functions.bold },
+    ["@function.method.call"] = { fg = p.cyan, bold = o.styles.functions.bold },
     ["@constructor"] = { fg = p.yellow },
     ["@operator"] = { fg = p.yellow },
-    ["@keyword"] = maybe_glow(p.yellow),
-    ["@keyword.coroutine"] = maybe_glow(p.yellow),
-    ["@keyword.function"] = maybe_glow(p.yellow),
-    ["@keyword.operator"] = maybe_glow(p.yellow),
+    ["@keyword"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.coroutine"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.function"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.operator"] = { fg = p.yellow, bold = o.styles.keywords.bold },
     ["@keyword.import"] = { fg = p.green },
-    ["@keyword.type"] = maybe_glow(p.red),
-    ["@keyword.modifier"] = maybe_glow(p.yellow),
-    ["@keyword.repeat"] = maybe_glow(p.yellow),
-    ["@keyword.return"] = maybe_glow(p.yellow),
+    ["@keyword.type"] = { fg = p.red, bold = o.styles.types.bold },
+    ["@keyword.modifier"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.repeat"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.return"] = { fg = p.yellow, bold = o.styles.keywords.bold },
     ["@keyword.debug"] = { fg = p.orange },
-    ["@keyword.exception"] = maybe_glow(p.red),
-    ["@keyword.conditional"] = maybe_glow(p.yellow),
-    ["@keyword.conditional.ternary"] = maybe_glow(p.yellow),
+    ["@keyword.exception"] = { fg = p.red, bold = o.styles.keywords.bold },
+    ["@keyword.conditional"] = { fg = p.yellow, bold = o.styles.keywords.bold },
+    ["@keyword.conditional.ternary"] = { fg = p.yellow, bold = o.styles.keywords.bold },
     ["@keyword.directive"] = { fg = p.purple },
     ["@keyword.directive.define"] = { fg = p.purple },
     ["@punctuation.delimiter"] = { fg = p.fg_dim },
