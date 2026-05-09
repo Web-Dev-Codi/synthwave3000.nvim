@@ -5,7 +5,7 @@ local function build(p, o)
     NvimTreeNormalFloat = { fg = p.fg, bg = bg },
     NvimTreeNormalNC = { fg = p.fg, bg = bg },
     NvimTreeLineNr = { fg = p.comment },
-    NvimTreeWinSeparator = { fg = p.bg_highlight, bg = bg },
+		NvimTreeWinSeparator = { fg = p.pink, bg = bg },
     NvimTreeEndOfBuffer = { fg = bg, bg = bg },
     NvimTreePopup = { fg = p.fg, bg = p.bg_panel },
     NvimTreeSignColumn = { bg = bg },

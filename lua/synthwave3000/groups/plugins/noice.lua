@@ -16,7 +16,7 @@ local function build(p, o)
     NoicePopup = { fg = p.fg, bg = bg_panel },
     NoicePopupBorder = { fg = p.pink, bg = bg_panel },
     NoicePopupmenu = { fg = p.fg, bg = bg_panel },
-    NoicePopupmenuBorder = { fg = p.bg_highlight, bg = bg_panel },
+    NoicePopupmenuBorder = { fg = p.pink, bg = bg_panel },
     NoicePopupmenuMatch = { fg = p.cyan, bold = true },
     NoicePopupmenuSelected = { fg = p.fg, bg = p.bg_highlight },
     NoiceVirtualText = { fg = p.comment },

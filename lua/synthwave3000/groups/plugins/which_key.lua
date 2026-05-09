@@ -3,7 +3,7 @@ local function build(p, o)
 		WhichKey = { fg = p.pink, bold = true },
 		WhichKeyGroup = { fg = p.cyan, bold = true },
 		WhichKeyDesc = { fg = p.fg },
-		WhichKeySeparator = { fg = p.fg_dim },
+		WhichKeySeparator = { fg = p.pink },
 		WhichKeyFloat = { bg = p.bg_dark },
 		WhichKeyValue = { fg = p.green },
 	}

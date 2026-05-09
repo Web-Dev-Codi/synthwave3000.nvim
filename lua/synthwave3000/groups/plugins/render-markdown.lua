@@ -15,7 +15,7 @@ local function build(p, o)
     RenderMarkdownH5Bg = { bg = util.blend(p.green, bg, 0.1) },
     RenderMarkdownH6Bg = { bg = util.blend(p.cyan, bg, 0.1) },
     RenderMarkdownCode = { bg = p.bg_highlight },
-    RenderMarkdownCodeBorder = { bg = p.bg_highlight },
+		RenderMarkdownCodeBorder = { fg = p.pink },
     RenderMarkdownCodeInfo = { fg = p.cyan },
     RenderMarkdownCodeInline = { fg = p.pink, bg = p.bg_highlight },
     RenderMarkdownQuote = { fg = p.purple },

@@ -7,10 +7,12 @@ CONTENTS                                                    *synthwave3000*
 2. Installation ................. |synthwave3000-installation|
 3. Usage ........................ |synthwave3000-usage|
 4. Configuration ................ |synthwave3000-configuration|
-5. Light & Dark Mode ............ |synthwave3000-light-dark|
-6. Glow Effect .................. |synthwave3000-glow|
-7. Plugin Support ............... |synthwave3000-plugins|
-8. Customization ................ |synthwave3000-customization|
+5. Palette ...................... |synthwave3000-palette|
+6. Light & Dark Mode ............ |synthwave3000-light-dark|
+7. Glow Effect .................. |synthwave3000-glow|
+8. Plugin Support ............... |synthwave3000-plugins|
+9. Transparency ................. |synthwave3000-transparent|
+10. Customization ................ |synthwave3000-customization|
 
 ==============================================================================
 INTRODUCTION                                    *synthwave3000-introduction*
@@ -18,12 +20,17 @@ INTRODUCTION                                    *synthwave3000-introduction*
 synthwave3000.nvim is a Neovim colorscheme inspired by Robb Owen's Synthwave
 '84 VS Code theme. It features:
 
-- Dark mode with the canonical Synthwave '84 palette
-- Light mode with an inverted variant
-- WCAG AA contrast compliance on all backgrounds
+- Dark mode with the canonical Synthwave '84 palette (#262335 background)
+- Light mode with an inverted variant (#f5f0ff background)
+- Synthwave "glow" effect: bold + HSL-brightened foreground on keywords,
+  functions, and types (auto-disabled in light mode)
+- WCAG AA contrast compliance (>=4.5:1) on all backgrounds
 - Full Neovim 0.10/0.11/0.12 compatibility
-- Support for 17+ popular plugins
-- Extensive customization options
+- 21 plugin integrations with per-plugin toggle options
+- Transparent background support — Normal, sidebars, floats, statusline
+  section C all become "NONE" when enabled
+- All structural borders use the signature pink (#FF00FF) accent
+- Customizable via |on_colors| palette mutation and |on_highlights| override
 
 ==============================================================================
 INSTALLATION                                        *synthwave3000-installation*
@@ -72,110 +79,230 @@ The minimal setup:
 ==============================================================================
 CONFIGURATION                                      *synthwave3000-configuration*
 
+Full configuration with all defaults:
 >lua
   require("synthwave3000").setup({
     style = "auto",              -- "dark" | "light" | "auto"
-    transparent = false,         -- transparent background
-    terminal_colors = true,      -- set terminal colors
+    transparent = false,         -- transparent backgrounds
+    terminal_colors = true,      -- set terminal ANSI palette
+    background = nil,            -- override Normal bg (nil = palette default)
     styles = {
-      comments = { italic = true },
-      keywords = { bold = true },
-      functions = { bold = true },
-      variables = {},
-      strings = {},
-      types = { bold = true },
-      operators = {},
+      comments   = { italic = true },
+      keywords   = { bold = true },
+      functions  = { bold = true },
+      variables  = {},
+      strings    = {},
+      types      = { bold = true },
+      operators  = {},
     },
     glow = {
-      enabled = true,
-      brighten = 0.10,
+      enabled    = true,         -- enable glow for keywords/functions/types
+      bold       = true,         -- apply bold to glow groups
+      brighten   = 0.10,         -- HSL lightness boost (0.0 - 1.0)
     },
     plugins = {
-      telescope = true,
-      nvim_tree = true,
-      neo_tree = true,
-      bufferline = true,
-      lualine = true,
-      gitsigns = true,
-      diffview = true,
-      cmp = true,
-      blink_cmp = true,
-      mini = true,
+      telescope        = true,
+      nvim_tree        = true,
+      neo_tree         = true,
+      bufferline       = true,
+      lualine          = true,
+      gitsigns         = true,
+      diffview         = true,
+      cmp              = true,
+      blink_cmp        = true,
+      mini             = true,
       indent_blankline = true,
-      which_key = true,
-      noice = true,
-      notify = true,
-      trouble = true,
-      flash = true,
-      snacks = true,
+      which_key        = true,
+      noice            = true,
+      notify           = true,
+      trouble          = true,
+      flash            = true,
+      snacks           = true,
+      dashboard        = true,
+      aerial           = true,
+      dap              = true,
+      neogit           = true,
+      render_markdown  = true,
     },
-    on_colors = function(colors) end,
+    on_colors     = function(colors) end,
     on_highlights = function(highlights, colors) end,
   })
+<
+
+==============================================================================
+PALETTE                                                *synthwave3000-palette*
+
+Twenty color keys, each with dark and light mode variants. Accessible via
+|on_colors| for overriding.
+
+Dark mode colors:                                          *synthwave3000-dark*
+>lua
+    bg             = "#262335"   -- main background
+    bg_dark        = "#0D0221"   -- sidebar / float / statusline
+    bg_darker      = "#171520"   -- inactive statusline / tabline fill
+    bg_panel       = "#2a2139"   -- popup menu background
+    bg_highlight   = "#34294f"   -- cursor line / color column
+    bg_visual      = "#413f4e"   -- visual selection
+    fg             = "#ffffff"   -- primary foreground
+    fg_dim         = "#b6b1b1"   -- dimmed / inactive text
+    comment        = "#848bbd"   -- comments
+    pink           = "#FF00FF"   -- accent: borders, titles, selection
+    cyan           = "#00FFFF"   -- strings, special values, links
+    green          = "#33FF33"   -- added / success / git staged
+    yellow         = "#fede5d"   -- warnings / changed / modified
+    orange         = "#f97e72"   -- unsaved changes / operators
+    orange_bright  = "#ff8b39"   -- bright orange accent
+    red            = "#fe4450"   -- errors / deleted / removed
+    purple         = "#8C1EFF"   -- keywords / special identifiers
+    blue           = "#03edf9"   -- blue accent
+    selection      = "#463465"   -- scrollbar thumb
+    none           = "NONE"      -- transparent sentinel
+<
+
+Light mode colors:                                        *synthwave3000-light*
+>lua
+    bg             = "#f5f0ff"
+    bg_dark        = "#e8e0f0"
+    bg_darker      = "#ddd4e8"
+    bg_panel       = "#f0ebf8"
+    bg_highlight   = "#ddd4e8"
+    bg_visual      = "#dad5e5"
+    fg             = "#1a1a2e"
+    fg_dim         = "#5a5a7a"
+    comment        = "#7c7fa0"
+    pink           = "#c445a3"
+    cyan           = "#007777"
+    green          = "#2d8f5e"
+    yellow         = "#b0901f"
+    orange         = "#c0552a"
+    orange_bright  = "#d4652a"
+    red            = "#c62828"
+    purple         = "#7c5295"
+    blue           = "#0288d1"
+    selection      = "#d0c0e8"
+    none           = "NONE"
 <
 
 ==============================================================================
 LIGHT & DARK MODE                                  *synthwave3000-light-dark*
 
 Set |synthwave3000-style| to "auto" and the colorscheme follows
-|vim.o.background|. Set to "dark" or "light" to lock one mode.
+|vim.o.background|. If |vim.o.background| is "light", the light palette
+is loaded; otherwise the dark palette is used. Set style to "dark" or
+"light" to lock one mode.
 
-The glow effect auto-disables in light mode.
+The glow effect auto-disables in light mode because brightened colors
+would lose contrast against a light background.
 
 ==============================================================================
 GLOW EFFECT                                               *synthwave3000-glow*
 
 The "glow" effect is an approximation of the VS Code Synthwave '84 CSS
-text-shadow. In a terminal, glow is simulated via bold + brightened foreground
-colors. Optionally, a faint background halo can be enabled.
+text-shadow. Since Neovim renders text via a cell-based terminal grid
+(one foreground + one background per cell), true GPU-composited glow,
+bloom, or blur effects are not possible. No terminal emulator, SGR
+escape code, or Neovim 0.12 highlight attribute supports glow rendering.
 
+Instead, glow is simulated through two mechanisms applied to
+|synthwave3000-glow-groups|:
+
+1. **Foreground brightening** — `util.brighten(color, amount)` boosts
+   the HSL lightness of affected groups by `glow.brighten` (default 0.10).
+2. **Bold** — groups with glow get `bold = true` by default.
+
+Affected groups: Keyword, Function, Type, and their treesitter
+equivalents (@keyword, @function, @type, and related captures).
+
+Configuration:
 >lua
   glow = {
-    enabled = true,
-    bold = true,
-    brighten = 0.10,
+    enabled    = true,      -- toggle glow on/off
+    bold       = true,      -- apply bold style
+    brighten   = 0.10,      -- HSL lightness boost (0.0 - 1.0)
   }
 <
-
 Glow is auto-disabled in light mode.
 
 ==============================================================================
 PLUGIN SUPPORT                                         *synthwave3000-plugins*
 
-Supported plugins (toggle via opts.plugins):
-- telescope.nvim
-- nvim-tree.lua
-- neo-tree.nvim
-- bufferline.nvim
-- lualine.nvim
-- gitsigns.nvim
-- diffview.nvim
-- nvim-cmp
-- blink.cmp
-- mini.nvim
-- indent-blankline.nvim
-- which-key.nvim
-- noice.nvim
-- nvim-notify
-- trouble.nvim
-- flash.nvim
-- snacks.nvim
+Supported plugins. Each can be toggled via opts.plugins.<key>:
+
+    Plugin                  Toggle Key
+    --------------------    --------------------
+    telescope.nvim          plugins.telescope
+    nvim-tree.lua           plugins.nvim_tree
+    neo-tree.nvim           plugins.neo_tree
+    bufferline.nvim         plugins.bufferline
+    lualine.nvim            plugins.lualine
+    gitsigns.nvim           plugins.gitsigns
+    diffview.nvim           plugins.diffview
+    nvim-cmp                plugins.cmp
+    blink.cmp               plugins.blink_cmp
+    mini.nvim               plugins.mini
+    indent-blankline.nvim   plugins.indent_blankline
+    which-key.nvim          plugins.which_key
+    noice.nvim              plugins.noice
+    nvim-notify             plugins.notify
+    trouble.nvim            plugins.trouble
+    flash.nvim              plugins.flash
+    snacks.nvim             plugins.snacks
+    dashboard-nvim          plugins.dashboard
+    aerial.nvim             plugins.aerial
+    nvim-dap / nvim-dap-ui  plugins.dap
+    neogit                  plugins.neogit
+    render-markdown.nvim    plugins.render_markdown
+
+All plugin border/separator highlight groups use the theme's pink accent
+color. Notification borders preserve severity colors (red = error,
+yellow = warn, cyan = info, comment = debug, purple = trace).
+
+Bufferline gets full diagnostic indicator support: BufferLineError,
+BufferLineWarning, BufferLineInfo, BufferLineHint, BufferLineDiagnostic
+(each with _Visible and _Selected variants), plus BufferLineDuplicate
+(purple) for duplicate buffers and BufferLinePick (green) for teleported
+buffers.
+
+==============================================================================
+TRANSPARENCY                                            *synthwave3000-transparent*
+
+When `transparent = true` is set:
+
+    Element                           Background
+    -------------------------------   ----------
+    Normal, NormalNC                  "NONE"
+    NormalFloat, SignColumn,          "NONE"
+      FoldColumn
+    StatusLine section C              "NONE"
+    WinBar section C                  "NONE"
+    TabLine / TabLineFill section C   "NONE"
+    StatusLine section A (mode)       Keeps colored bg
+    Pmenu / floating panel            Keeps palette bg for readability
+    Bufferline section A, B           Keeps colored bg for distinction
+    Border fg colors                  Unaffected (stay pink)
+
+To override Normal background independently of transparency, use the
+`background` option (e.g. `background = "#1a1a1a"`).
 
 ==============================================================================
 CUSTOMIZATION                                        *synthwave3000-customization*
 
-Override any highlight group via |on_highlights|:
+Override any color via |on_colors|. This callback receives the full
+palette table (dark or light, depending on style) and can mutate it
+before highlight groups are generated:
+>lua
+  on_colors = function(c)
+    c.pink = "#ff69b4"
+    c.cyan = "#00bcd4"
+  end
+<
+
+Override any highlight group via |on_highlights|. This callback receives
+the fully-generated groups table and the palette table:
 >lua
   on_highlights = function(hl, c)
     hl.Comment = { fg = c.comment, italic = false }
     hl.Normal = { fg = c.fg, bg = "#000000" }
-  end
-<
-
-Override any color via |on_colors|:
->lua
-  on_colors = function(c)
-    c.pink = "#ff69b4"
   end
 <
 

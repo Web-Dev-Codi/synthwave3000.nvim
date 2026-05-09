@@ -2,7 +2,7 @@ local function build(p, o)
 	local bg_panel = o.transparent and "NONE" or p.bg_panel
 	return {
 		BlinkCmpMenu = { fg = p.fg, bg = bg_panel },
-		BlinkCmpMenuBorder = { fg = p.bg_highlight, bg = bg_panel },
+		BlinkCmpMenuBorder = { fg = p.pink, bg = bg_panel },
 		BlinkCmpMenuSelection = { fg = p.fg, bg = p.bg_highlight },
 		BlinkCmpScrollBarThumb = { bg = p.selection },
 		BlinkCmpScrollBarGutter = { bg = bg_panel },
@@ -40,11 +40,11 @@ local function build(p, o)
 		BlinkCmpSource = { fg = p.fg_dim },
 		BlinkCmpGhostText = { fg = p.comment },
 		BlinkCmpDoc = { fg = p.fg, bg = bg_panel },
-		BlinkCmpDocBorder = { fg = p.bg_highlight, bg = bg_panel },
-		BlinkCmpDocSeparator = { fg = p.bg_highlight },
+		BlinkCmpDocBorder = { fg = p.pink, bg = bg_panel },
+		BlinkCmpDocSeparator = { fg = p.pink },
 		BlinkCmpDocCursorLine = { bg = p.bg_highlight },
 		BlinkCmpSignatureHelp = { fg = p.fg, bg = bg_panel },
-		BlinkCmpSignatureHelpBorder = { fg = p.bg_highlight, bg = bg_panel },
+		BlinkCmpSignatureHelpBorder = { fg = p.pink, bg = bg_panel },
 		BlinkCmpSignatureHelpActiveParameter = { fg = p.cyan, bold = true },
 	}
 end
