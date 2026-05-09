@@ -1,5 +1,5 @@
 local function build(p, o)
-  local bg = o.transparent and "NONE" or p.bg
+  local bg = o.transparent and "NONE" or (o.background or p.bg)
   local util = require("synthwave3000.util")
   return {
     NeogitBranch = { fg = p.pink },

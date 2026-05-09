@@ -1,5 +1,5 @@
 local function build(p, o)
-  local bg = o.transparent and "NONE" or p.bg
+  local bg = o.transparent and "NONE" or (o.background or p.bg)
   return {
     MiniIndentscopeSymbol = { fg = p.comment },
     MiniStatuslineModeNormal = { fg = p.bg, bg = p.pink, bold = true },
