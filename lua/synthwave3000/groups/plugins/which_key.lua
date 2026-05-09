@@ -4,7 +4,7 @@ local function build(p, o)
 		WhichKeyGroup = { fg = p.cyan, bold = true },
 		WhichKeyDesc = { fg = p.fg },
 		WhichKeySeparator = { fg = p.fg_dim },
-		WhichKeyFloat = { bg = p.none },
+		WhichKeyFloat = { bg = p.bg_dark },
 		WhichKeyValue = { fg = p.green },
 	}
 end
