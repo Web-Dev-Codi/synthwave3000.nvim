@@ -16,11 +16,8 @@ M.defaults = {
 	},
 	glow = {
 		enabled = true,
-		groups = { "Function", "Keyword", "Type", "@function", "@keyword", "@type" },
 		bold = true,
 		brighten = 0.10,
-		background = false,
-		bg_blend = 0.06,
 	},
 	on_colors = nil,
 	on_highlights = nil,

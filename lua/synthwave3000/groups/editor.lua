@@ -1,23 +1,15 @@
 local function build(p, o)
 	local bg = o.transparent and "NONE" or (o.background or p.bg)
-	local bg_float = o.transparent and "NONE" or p.bg_dark
-	local bg_sidebar = o.transparent and "NONE" or p.bg_dark
-	local glow_enabled = o.glow.enabled and o.style == "dark"
-
-	local function glow_group(fg)
-		if glow_enabled then
-			return { fg = require("synthwave3000.util").brighten(fg, o.glow.brighten), bold = o.glow.bold }
-		end
-		return { fg = fg }
-	end
+	local bg_dark = o.transparent and "NONE" or p.bg_dark
+	local bg_darker = o.transparent and "NONE" or p.bg_darker
 
 	return {
 		Normal = { fg = p.fg, bg = bg },
 		NormalNC = { fg = p.fg, bg = bg },
-		NormalFloat = { fg = p.fg, bg = bg_float },
-		FloatBorder = { fg = p.pink, bg = bg_float },
-		FloatTitle = { fg = p.cyan, bg = bg_float, bold = true },
-		FloatFooter = { fg = p.fg_dim, bg = bg_float },
+		NormalFloat = { fg = p.fg, bg = bg_dark },
+		FloatBorder = { fg = p.pink, bg = bg_dark },
+		FloatTitle = { fg = p.cyan, bg = bg_dark, bold = true },
+		FloatFooter = { fg = p.fg_dim, bg = bg_dark },
 		ColorColumn = { bg = p.bg_highlight },
 		Conceal = { fg = p.comment },
 		Cursor = { fg = p.bg, bg = p.fg },
@@ -38,8 +30,8 @@ local function build(p, o)
 		VertSplit = { fg = p.orange },
 		WinSeparator = { fg = p.green },
 		Folded = { fg = p.comment, bg = p.bg_highlight },
-		FoldColumn = { fg = p.comment, bg = bg_sidebar },
-		SignColumn = { bg = bg_sidebar },
+		FoldColumn = { fg = p.comment, bg = bg_dark },
+		SignColumn = { bg = bg_dark },
 		IncSearch = { fg = p.bg, bg = p.yellow },
 		Substitute = { fg = p.bg, bg = p.orange },
 		LineNr = { fg = p.comment },
@@ -66,12 +58,12 @@ local function build(p, o)
 		SpellCap = { sp = p.yellow, undercurl = true },
 		SpellLocal = { sp = p.cyan, undercurl = true },
 		SpellRare = { sp = p.pink, undercurl = true },
-		StatusLine = { fg = p.fg, bg = p.bg_dark },
-		StatusLineNC = { fg = p.fg_dim, bg = p.bg_darker },
-		StatusLineTerm = { fg = p.fg, bg = p.bg_dark },
-		StatusLineTermNC = { fg = p.fg_dim, bg = p.bg_darker },
-		TabLine = { fg = p.fg_dim, bg = p.bg_dark },
-		TabLineFill = { bg = p.bg_darker },
+		StatusLine = { fg = p.fg, bg = bg_dark },
+		StatusLineNC = { fg = p.fg_dim, bg = bg_darker },
+		StatusLineTerm = { fg = p.fg, bg = bg_dark },
+		StatusLineTermNC = { fg = p.fg_dim, bg = bg_darker },
+		TabLine = { fg = p.fg_dim, bg = bg_dark },
+		TabLineFill = { bg = bg_darker },
 		TabLineSel = { fg = p.pink, bg = p.bg, bold = true },
 		Title = { fg = p.pink, bold = true },
 		Visual = { bg = p.bg_visual },
@@ -79,8 +71,8 @@ local function build(p, o)
 		WarningMsg = { fg = p.yellow },
 		Whitespace = { fg = p.bg_highlight },
 		WildMenu = { fg = p.bg, bg = p.pink },
-		WinBar = { fg = p.fg, bg = p.bg_dark },
-		WinBarNC = { fg = p.fg_dim, bg = p.bg_darker },
+		WinBar = { fg = p.fg, bg = bg_dark },
+		WinBarNC = { fg = p.fg_dim, bg = bg_darker },
 		MsgArea = { fg = p.fg },
 		MsgSeparator = { fg = p.fg_dim },
 		FloatShadow = { fg = p.bg_darker },

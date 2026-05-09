@@ -1,5 +1,4 @@
 local function build(p, o)
-	local bg = o.transparent and "NONE" or (o.background or p.bg)
 	local bg_panel = o.transparent and "NONE" or p.bg_panel
 	return {
 		BlinkCmpMenu = { fg = p.fg, bg = bg_panel },

@@ -89,7 +89,6 @@ CONFIGURATION                                      *synthwave3000-configuration*
     glow = {
       enabled = true,
       brighten = 0.10,
-      background = false,
     },
     plugins = {
       telescope = true,
@@ -133,11 +132,8 @@ colors. Optionally, a faint background halo can be enabled.
 >lua
   glow = {
     enabled = true,
-    groups = { "Function", "Keyword", "Type", "@function", "@keyword", "@type" },
     bold = true,
     brighten = 0.10,
-    background = false,
-    bg_blend = 0.06,
   }
 <
 

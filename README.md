@@ -65,9 +65,9 @@ vim.cmd.colorscheme("synthwave3000")
 | `style` | `"auto"` | `"dark"`, `"light"`, or `"auto"` (follows vim.o.background) |
 | `transparent` | `false` | Transparent backgrounds for Normal, sidebar, etc. |
 | `terminal_colors` | `true` | Set terminal ANSI colors |
-| `glow.enabled` | `true` | Synthwave glow (auto-disables in light mode) |
+| `glow.enabled` | `true` | Synthwave glow (bold + brightened fg; auto-disables in light mode) |
 | `glow.brighten` | `0.10` | HSL lightness boost for glow groups |
-| `glow.background` | `false` | Faint background halo for glow groups |
+| `glow.bold` | `true` | Apply bold to glow groups |
 
 ### Styles
 
