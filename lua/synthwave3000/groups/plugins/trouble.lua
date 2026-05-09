@@ -1,9 +1,10 @@
 local function build(p, o)
+  local bg_dark = o.transparent and "NONE" or p.bg_dark
   return {
-    TroubleNormal = { fg = p.fg, bg = p.bg_dark },
+    TroubleNormal = { fg = p.fg, bg = bg_dark },
     TroubleText = { fg = p.fg },
     TroubleCount = { fg = p.pink, bold = true },
-    TroubleNormalFloat = { fg = p.fg, bg = p.bg_dark },
+    TroubleNormalFloat = { fg = p.fg, bg = bg_dark },
     TroubleIndent = { fg = p.comment },
     TroubleFoldIcon = { fg = p.comment },
     TroubleLocation = { fg = p.cyan },

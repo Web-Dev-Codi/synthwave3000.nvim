@@ -1,6 +1,7 @@
 local function build(p, o)
+  local bg_dark = o.transparent and "NONE" or p.bg_dark
   return {
-    DiffviewNormal = { fg = p.fg, bg = p.bg_dark },
+    DiffviewNormal = { fg = p.fg, bg = bg_dark },
     DiffviewStatusAdded = { fg = p.green },
     DiffviewStatusModified = { fg = p.yellow },
     DiffviewStatusDeleted = { fg = p.red },
