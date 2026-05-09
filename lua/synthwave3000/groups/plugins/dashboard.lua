@@ -1,4 +1,5 @@
 local function build(p, o)
+  local bg = o.transparent and "NONE" or (o.background or p.bg)
   return {
     DashboardHeader = { fg = p.pink, bold = true },
     DashboardFooter = { fg = p.comment, italic = true },

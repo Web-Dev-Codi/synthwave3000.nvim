@@ -1,4 +1,5 @@
 local function build(p, o)
+  local bg = o.transparent and "NONE" or (o.background or p.bg)
   return {
     CmpItemAbbr = { fg = p.fg },
     CmpItemAbbrDeprecated = { fg = p.fg_dim, strikethrough = true },
