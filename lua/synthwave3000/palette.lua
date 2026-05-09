@@ -2,7 +2,7 @@ local M = {}
 
 local dark = {
 	bg = "#262335",
-	bg_dark = "#FF00FF",
+	bg_dark = "#0D0221",
 	bg_darker = "#171520",
 	bg_panel = "#2a2139",
 	bg_highlight = "#34294f",
