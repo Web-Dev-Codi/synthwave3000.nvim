@@ -5,7 +5,7 @@ local function build(p, o)
 		WhichKeyDesc = { fg = p.fg },
 		WhichKeySeparator = { fg = p.fg_dim },
 		WhichKeyFloat = { bg = p.none },
-		WhichKeyBorder = { fg = p.bg_highlight, bg = p.bg_panel },
+		WhichKeyBorder = { fg = p.green, bg = p.bg_panel },
 		WhichKeyValue = { fg = p.green },
 	}
 end
