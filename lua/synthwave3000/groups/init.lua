@@ -32,6 +32,9 @@ function M.build(palette, opts)
 	if opts.plugins.diffview then
 		merge(require("synthwave3000.groups.plugins.diffview").build(palette, opts))
 	end
+	if opts.plugins.copilot then
+		merge(require("synthwave3000.groups.plugins.copilot").build(palette, opts))
+	end
 	if opts.plugins.cmp then
 		merge(require("synthwave3000.groups.plugins.nvim_cmp").build(palette, opts))
 	end

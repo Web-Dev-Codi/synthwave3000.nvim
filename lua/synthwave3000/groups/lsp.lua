@@ -1,7 +1,7 @@
 local function build(p, o)
 	return {
 		DiagnosticError = { fg = p.red },
-		DiagnosticWarn = { fg = p.fg_dim },
+		DiagnosticWarn = { fg = p.yellow },
 		DiagnosticInfo = { fg = p.cyan },
 		DiagnosticHint = { fg = p.purple },
 		DiagnosticOk = { fg = p.green },

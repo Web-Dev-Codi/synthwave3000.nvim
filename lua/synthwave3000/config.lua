@@ -23,6 +23,7 @@ M.defaults = {
 		bufferline = true,
 		gitsigns = true,
 		diffview = true,
+		copilot = true,
 		cmp = true,
 		blink_cmp = true,
 		mini = true,
