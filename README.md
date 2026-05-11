@@ -141,7 +141,6 @@ require("synthwave3000").setup({
 
   -- Plugin toggles (all enabled by default) -----------------------
   -- These exist for opt-out, not opt-in. synthwave3000 already looks
-  -- correct in every modern Neovim plugin via hub-group inheritance.
   -- Disable a toggle only if you want to override with your own setup.
   plugins = {
     telescope        = true,   nvim_tree        = true,
