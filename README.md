@@ -21,7 +21,7 @@
 
 <br>
 
-<img src="https://placehold.co/800x450/262335/ffffff?text=synthwave3000+Dark+Mode&font=source-sans-pro" width="100%" alt="synthwave3000 dark mode preview">
+<img src="assets/transparent.png" width="100%" alt="synthwave3000 dark mode preview">
 
 ---
 
@@ -43,9 +43,9 @@
 
 | Variant | Preview |
 |---------|---------|
-| **Dark** — the canonical sunset | <img src="https://placehold.co/600x340/262335/ffffff?text=Dark+Mode&font=source-sans-pro" width="100%" alt="dark"> |
-| **Light** — the violet hour | <img src="https://placehold.co/600x340/f5f0ff/1a1a2e?text=Light+Mode&font=source-sans-pro" width="100%" alt="light"> |
-| **Transparent** — float on your wallpaper | <img src="https://placehold.co/600x340/111111/ffffff?text=Transparent+Mode&font=source-sans-pro" width="100%" alt="transparent"> |
+| **Dark** — the canonical sunset | <img src="assets/darkmode.png" width="100%" alt="dark"> |
+| **Light** — the violet hour | <img src="assets/lightmode.png" width="100%" alt="light"> |
+| **Transparent** — float on your wallpaper | <img src="assets/transparent.png" width="100%" alt="transparent"> |
 
 </details>
 
@@ -72,6 +72,7 @@
 <summary><b>Other plugin managers</b></summary>
 
 **packer.nvim:**
+
 ```lua
 use {
   "Web-Dev-Codi/synthwave3000.nvim",
@@ -83,11 +84,13 @@ use {
 ```
 
 **vim-plug:**
+
 ```vim
 Plug 'Web-Dev-Codi/synthwave3000.nvim'
 " After plug#end():
 lua require("synthwave3000").setup({}); vim.cmd.colorscheme("synthwave3000")
 ```
+
 </details>
 
 ---
