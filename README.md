@@ -25,21 +25,8 @@
 
 ---
 
-## 🌅 The neon, but you can read it
-
-Synthwave colorschemes are usually one of two things: gorgeous and unreadable, or readable and not actually synthwave. synthwave3000 is built around three convictions.
-
-**Contrast is non-negotiable.** Every accent in the dark palette clears WCAG AAA (7:1) against the background. Every accent in the light palette clears AA (4.5:1). The neons are real. The neons are also legible at 4am on a 13" laptop.
-
-**Themes should style ideas, not plugins.** Modern Neovim plugins link their highlights to semantic hub groups (`DiagnosticError`, `@variable`, `Added`, `FloatBorder`, and ~40 more) using `default = true`. synthwave3000 carefully colors every one of those hub groups. A plugin you install tomorrow — one we've literally never seen — looks correct the first time you load it. No integration table. No `enable = true` switches. No PRs every week for "please add support for X."
-
-**Both modes deserve the same love.** The light variant isn't a desaturated afterthought. It uses the same hue families as the dark variant — magenta becomes mulberry, cyan becomes deep teal, violet becomes eggplant — recalibrated for paper. The violet hour, just slightly later in the day.
-
----
-
 ## ✨ Features
 
-- 🔌 **Plugin-agnostic by design** — works on plugins we've never seen, via Neovim's built-in hub-group inheritance
 - ♿ **WCAG AAA on dark, AA on light** — every accent verified against its background
 - 🌗 **First-class light mode** — not an afterthought; same hue families, recalibrated lightness
 - ⚡ **One-line install, zero required config** — `colorscheme synthwave3000` and you're done
@@ -190,23 +177,7 @@ end
 
 ---
 
-## 🔌 Plugin-agnostic by design
-
-Most colorschemes ship 50, 80, even 100 "plugin integrations" — and still field a steady stream of _please add support for X_ issues every week. synthwave3000 takes the opposite bet.
-
-We style Neovim's **hub groups** — the semantic highlights every well-behaved plugin already inherits from: `DiagnosticError`, `Function`, `@variable`, `FloatBorder`, `Added`, `Changed`, `WinSeparator`, `RainbowDelimiter1…7`, and ~40 more. If a plugin uses `vim.api.nvim_set_hl(..., { default = true, link = ... })` — and modern Neovim plugins overwhelmingly do — **synthwave3000 styles it correctly the first time you load it, even if we've never heard of it.**
-
-| | synthwave3000 | Theme with 50+ integrations |
-|---|---|---|
-| Works on plugins released _after_ the theme | ✅ via hub-group inheritance | ❌ requires PR |
-| New-plugin support PRs needed | Rare (only for polish) | Constant |
-| Config table size | ~10 lines | 50+ toggles |
-| User override always wins | ✅ `default = true` everywhere | ⚠️ depends on integration |
-| Light + dark mode parity | ✅ identical group surface | ⚠️ often partial |
-
-<details>
-<summary><b>Showcase — plugins verified with extra polish (click to expand)</b></summary>
-<br>
+## 🔌 Compatible Plugins
 
 These plugins have been visually verified. None require explicit enablement — they just work via hub-group inheritance.
 
@@ -233,8 +204,6 @@ These plugins have been visually verified. None require explicit enablement — 
 | nvim-dap / nvim-dap-ui | Debugger UI float border |
 | neogit | Git status buffer |
 | render-markdown.nvim | Headings, code blocks, links, checkboxes |
-
-</details>
 
 ---
 
@@ -307,31 +276,6 @@ When `transparent = true`:
 | Lualine sections A, B | Keep colored backgrounds |
 
 Border colors are not affected by transparency — they remain `pink` regardless.
-
----
-
-## 🙋 FAQ
-
-**Q: Why does plugin X look weird?**
-
-A: The plugin is likely hardcoding hex colors instead of linking to Neovim's hub groups. That's an upstream issue — file a PR on that plugin to use `link = "DiagnosticError"` (or appropriate group) with `default = true`. synthwave3000 already styles every hub group correctly.
-
-**Q: Do I need truecolor?**
-
-A: Yes. Neovim theme requires `set termguicolors`. Most modern terminals support it.
-
-**Q: Italics / undercurls not showing in tmux?**
-
-A: Add this to your tmux config:
-```
-set -g default-terminal "tmux-256color"
-set -ga terminal-overrides ",*:Tc"
-set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-```
-
-**Q: How is this different from other synthwave themes?**
-
-A: Every other synthwave theme ships 50+ plugin integrations you need to maintain. synthwave3000 relies on Neovim's built-in highlight inheritance — it styles the semantic groups that plugins already link to. A plugin released next year will look correct on day one, without a PR.
 
 ---
 
