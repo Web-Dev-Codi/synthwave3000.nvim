@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://placehold.co/180x180/262335/ff00ff?text=S3K&font=source-sans-pro" width="180" alt="synthwave3000.nvim">
+  <img src="assets/synthwave3000-logo.png" width="480" alt="synthwave3000.nvim">
   <h1>synthwave3000.nvim</h1>
   <p><i>Neon dreams. Real contrast ratios.</i></p>
 </div>
