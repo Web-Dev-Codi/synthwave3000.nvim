@@ -179,7 +179,7 @@ end
 
 ## 🔌 Compatible Plugins
 
-These plugins have been visually verified. None require explicit enablement — they just work via hub-group inheritance.
+These plugins have been visually verified.
 
 | Plugin | Highlights |
 |--------|-----------|
